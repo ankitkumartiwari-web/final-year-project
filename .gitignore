@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+venv/
+.env
+*.pyc
+
+# Data / ML
+*.csv
+*.parquet
+*.zip
+*.pkl
+
+# VS Code
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
