@@ -1,0 +1,172 @@
+[
+  {
+    "step_id": 1,
+    "id": "envoy_01_arrival",
+    "character": "Megasthenes",
+    "era": "Mauryan Empire",
+    "year": -302,
+    "event": "The Gates of Pataliputra",
+    "situation": "You have traveled months from Antioch to reach the Mauryan capital. You stand before Pataliputra, a city of staggering proportions with massive wooden walls and hundreds of towers. The Emperor Chandragupta is wary of Greek 'spies.' You must present your credentials in a way that proves you are a friend of the state, not just an observer for Seleucus.",
+    "character_pov": "I have seen the great cities of the West, but this place is a hive of organized power. I must record every gate and every tower for my King, but I must do so openly. If I appear too curious, Chanakya's spies will have me removed before I can even see the palace. Diplomacy is the art of watching without being seen watching.",
+    "facts": [
+      "Megasthenes described Pataliputra as being 9 miles long and 1.5 miles wide, surrounded by a wooden wall with 570 towers and 64 gates.",
+      "The city was protected by a massive moat that was 600 feet wide and 45 feet deep, which also served as the city's sewage system.",
+      "Megasthenes was sent to the Mauryan court following the peace treaty between Seleucus I Nicator and Chandragupta Maurya."
+    ],
+    "hint": "Establish transparency and respect for local security protocols to gain deeper access to the empire’s internal structures.",
+    "failure_message": "Megasthenes: 'You were caught sketching the fort's vulnerabilities in the middle of the night. Chanakya does not believe in 'artistic interest.' You have been expelled from the city, and the peace treaty is now under threat. An envoy must be a bridge, not a thief.'"
+  },
+  {
+    "step_id": 2,
+    "id": "envoy_02_the_seven_castes",
+    "character": "Megasthenes",
+    "era": "Mauryan Empire",
+    "year": -301,
+    "event": "The Ethnography of the East",
+    "situation": "The Emperor has granted you permission to study his people. You notice that Indian society is divided differently than the Greek world. You see philosophers, farmers, herdsmen, artisans, soldiers, 'overseers,' and councillors. Your King wants to know if this society is stable enough to be a permanent ally or if it will crumble from within.",
+    "character_pov": "There is a strange order here. No one marries outside their class, and no one changes their trade. It is rigid, yet it functions with the precision of a clock. I will report that the farmers are never harmed during war—even while a battle rages nearby, the peasant plows his field in peace. This is a level of civilization the West has yet to master.",
+    "facts": [
+      "Megasthenes famously (and somewhat inaccurately) recorded seven castes in India, likely confusing professional guilds with social castes.",
+      "He noted that 'slavery' as known in the Greek world did not exist in India, a point of significant debate among modern historians.",
+      "His observation that farmers were exempt from the ravages of war was a key highlight of his 'Indica,' intended to show the moral superiority of Indian warfare."
+    ],
+    "hint": "Focus your reporting on the unique social stabilities and moral codes that distinguish the Mauryan state from Hellenistic chaos.",
+    "failure_message": "Megasthenes: 'You reported that the Indians are just like the Persians. King Seleucus finds your report useless. If you cannot see the unique discipline of this land—how the farmers are protected and the philosophers respected—you have failed to understand why this empire stands.'"
+  },
+  {
+    "step_id": 3,
+    "id": "envoy_03_the_palace_spy",
+    "character": "Megasthenes",
+    "era": "Mauryan Empire",
+    "year": -300,
+    "event": "The Whispers of the Harem",
+    "situation": "While attending a royal banquet, a Greek-born servant (part of the marriage alliance between the Mauryas and Seleucids) whispers to you that a faction of Nanda loyalists plans to poison the Emperor's wine tonight. If you warn him, you save the alliance, but you expose the servant—who is also a secret informant for the Greek crown.",
+    "character_pov": "I am here to ensure the peace between two worlds. If Chandragupta dies, the empire falls into chaos, and my King loses his elephants and his eastern buffer. But if I lose my informant, I am blind in this palace. I must find a way to stop the poison without pointing a finger at the Greek quarter.",
+    "facts": [
+      "The treaty between Seleucus and Chandragupta included a 'Epigamia,' which many historians interpret as a marriage alliance (Chandragupta marrying a Greek princess).",
+      "Mauryan kings were notoriously paranoid about assassination, famously changing their bedrooms every night.",
+      "Megasthenes recorded that the King was guarded by armed women, another detail that fascinated his Greek audience."
+    ],
+    "hint": "Protect the life of the host sovereign as the primary guarantor of the diplomatic alliance, even at the cost of tactical intelligence assets.",
+    "failure_message": "Megasthenes: 'You stayed silent to protect your spy. The Emperor is dead, the palace is in flames, and the new Nanda rebels have declared war on the Greeks. You have traded an empire for a single informant. You are no longer an ambassador; you are a fugitive.'"
+  },
+  {
+    "step_id": 4,
+    "id": "envoy_04_the_gold_ants",
+    "character": "Megasthenes",
+    "era": "Mauryan Empire",
+    "year": -298,
+    "event": "The Myth of the Gold-Digging Ants",
+    "situation": "In the markets, you hear tales of giant 'ants' in the northern mountains that dig up gold. You haven't seen them, but the story is widespread. You are finishing your book, *Indica*. Do you include these fantastical stories to satisfy the Greek hunger for the exotic, or do you stick to the dry, administrative truths of Chanakya's taxes?",
+    "character_pov": "The West wants to believe India is a land of monsters and miracles. If I give them only the numbers of the treasury, they will stop reading. But if I give them the 'gold-digging ants,' my book will live for centuries—even if I suspect the 'ants' are simply Himalayan marmots covered in fur. I will balance the myth with the reality.",
+    "facts": [
+      "Megasthenes' *Indica* contained several 'miraculous' tales, including gold-digging ants and people with feet turned backwards.",
+      "Modern scholars believe the 'gold-digging ants' were actually Himalayan marmots whose burrowing brought gold dust to the surface.",
+      "Despite the myths, his administrative details (like the six municipal committees of Pataliputra) have been confirmed by archaeological finds and the Arthashastra."
+    ],
+    "hint": "Balance hard administrative data with cultural narratives to ensure your reports are both credible to experts and influential to the public.",
+    "failure_message": "Megasthenes: 'You wrote a report so dull that the King's ministers used it for scrap. An envoy must not only see the truth but also tell a story that makes his mission matter. You've failed to capture the imagination of the West.'"
+  },
+  {
+    "step_id": 5,
+    "id": "envoy_05_antioch_arrival",
+    "character": "Mauryan Envoy",
+    "era": "Mauryan Empire",
+    "year": -297,
+    "event": "The Court of Antioch",
+    "situation": "You have arrived at the Seleucid capital of Antioch. King Antiochus I welcomes you, but the atmosphere is tense. He views the Mauryan Empire as a 'barbarian' power that merely got lucky against Alexander’s successors. You must present the Emperor Bindusara’s gifts—fine silks and spices—while asserting that you represent the world's most powerful monarch.",
+    "character_pov": "The Greeks surround themselves with marble and logic, yet they are fractured. I must speak to them in the language of 'Amitraghata' (Slayer of Foes). I will show them that while they argue over philosophy, my Emperor rules a continent. I am not here to bow; I am here to establish an equal brotherhood of kings.",
+    "facts": [
+      "Bindusara was known to the Greeks as 'Amitrochates,' a corruption of the Sanskrit 'Amitraghata' (Slayer of Enemies).",
+      "Diplomatic exchanges were frequent; Antiochus I sent an ambassador named Daimachus to reside at the Mauryan court.",
+      "The Mauryans maintained a specific department for foreigners, indicating the high volume of international travelers and diplomats."
+    ],
+    "hint": "Project imperial strength and equality through the strategic display of wealth and the use of the Emperor's formidable titles.",
+    "failure_message": "Envoy: 'You acted with too much humility. The Greeks now see Bindusara as a mere vassal. They have increased their trade tariffs and insulted our gods. An envoy's shadow must be as long as his King’s reach.'"
+  },
+  {
+    "step_id": 6,
+    "id": "envoy_06_the_philosopher_trade",
+    "character": "Mauryan Envoy",
+    "era": "Mauryan Empire",
+    "year": -295,
+    "event": "The Request for a Sophist",
+    "situation": "Bindusara has sent you a specific list of items he desires from the West: 'Sweet wine, dried figs, and a Greek philosopher (Sophist).' King Antiochus grants the wine and figs but sends a sharp reply: 'It is not lawful among the Greeks to sell a philosopher.' You must find a way to secure the knowledge Bindusara seeks without causing a diplomatic rift over Greek law.",
+    "character_pov": "My King wants wisdom as much as he wants wine. If I return without the scholar, I look incompetent. If I insist, I insult their laws. I will propose an exchange of 'scholarly missions' instead—not a sale of a man, but a bridge of minds. We will send our Brahmins to Antioch if they send their Sophists to Pataliputra.",
+    "facts": [
+      "This famous exchange is recorded by the Greek historian Hegesander; it highlights Bindusara's personal interest in Hellenistic culture.",
+      "The refusal to 'sell' a philosopher was based on the Greek idea that wisdom was a divine gift and not a commodity for trade.",
+      "This era saw a genuine 'Syncretism' where Greek logic began to interact with Indian Nyaya and Buddhist dialectics."
+    ],
+    "hint": "Navigate legal and cultural deadlocks by reframing a 'transaction' into a 'mutual cultural exchange' to satisfy both sovereigns.",
+    "failure_message": "Envoy: 'You tried to bribe the King to buy the philosopher. He took it as a grave insult to Greek honor. You are lucky to leave with your head. You should have looked for a loophole in the law, not a price for the man.'"
+  },
+  {
+    "step_id": 7,
+    "id": "envoy_07_the_bactrian_buffer",
+    "character": "Mauryan Envoy",
+    "era": "Mauryan Empire",
+    "year": -290,
+    "event": "The Border Intelligence",
+    "situation": "On your journey back, you pass through the Greco-Bactrian borderlands. You notice the Greek governors there are becoming increasingly independent from Antioch. They are building massive fortifications. You must decide whether to report this as a threat to the Mauryan frontiers or as an opportunity to spark a rebellion that weakens the Seleucids from within.",
+    "character_pov": "A diplomat is a spy with a title. If the Bactrian Greeks break away from the Seleucids, the buffer between our empire and the West disappears. But a divided enemy is a weak enemy. I will recommend we fund the Bactrians secretly; let the Greeks fight the Greeks while we consolidate the Indus.",
+    "facts": [
+      "The Diodotus I eventually led the secession of Bactria from the Seleucid Empire, creating the Greco-Bactrian Kingdom.",
+      "Mauryan intelligence utilized 'Sattri' (class of spies) who often traveled disguised as merchants or pilgrims in foreign lands.",
+      "The North-West frontier was the most strategically sensitive area for the Mauryans, requiring constant diplomatic surveillance."
+    ],
+    "hint": "Prioritize the long-term destabilization of rival powers by identifying and supporting internal separatist movements.",
+    "failure_message": "Envoy: 'You ignored the signs of rebellion to maintain the 'peace.' Now a unified Greek force has seized the Khyber Pass. You failed to see that a diplomat's duty is to spot a war before it begins. The Emperor is displeased.'"
+  },
+  {
+    "step_id": 8,
+    "id": "envoy_08_sri_lanka",
+    "character": "Mahinda",
+    "era": "Mauryan Empire",
+    "year": -250,
+    "event": "The Encounter at Missaka Mountain",
+    "situation": "You have arrived on the island of Lanka. You encounter King Tissa during a royal hunt. Instead of presenting the riches of Pataliputra, you must engage him in a riddle of logic to test if his mind is ready for the Buddha’s Dhamma. If you fail to impress his intellect, he will see you as a mere wandering beggar rather than the son of an Emperor.",
+    "character_pov": "I did not come to claim his land for my father, but to claim his heart for the Truth. I must show him that a King’s true power is not in the deer he kills, but in the self-control he masters. The riddle of the mango tree will be the bridge to his conversion.",
+    "facts": [
+      "According to the Mahavamsa, Mahinda met King Devanampiya Tissa at Mihintale (Missaka Mountain) and tested him with a logic puzzle before preaching.",
+      "This mission marked the formal introduction of Theravada Buddhism to Sri Lanka, which became the state religion.",
+      "The King of Lanka was so impressed that he took the title 'Devanampiya' (Beloved of the Gods), mirroring Ashoka himself."
+    ],
+    "hint": "Prioritize intellectual and philosophical engagement over material displays of imperial wealth to establish spiritual authority.",
+    "failure_message": "Mahinda: 'You tried to buy the King's favor with Mauryan gold. He took the gold but kept his old ways. You have failed to plant the seed of Dhamma. A monk's only currency is wisdom; without it, you are just a traveler in a robe.'"
+  },
+  {
+    "step_id": 9,
+    "id": "envoy_09_the_mediterranean_edicts",
+    "character": "Dhamma Mahamatra",
+    "era": "Mauryan Empire",
+    "year": -255,
+    "event": "The Mission to the Five Kings",
+    "situation": "Ashoka has tasked you with traveling to the far West—to the courts of the Greek Kings in Egypt, Cyrene, and Macedonia. You carry edicts that claim 'Victory by Dhamma' is the best victory. The Greek kings, who value military glory above all, may see this as a sign of Mauryan weakness. You must convince them that Ashoka's peace is the mark of a superior civilization.",
+    "character_pov": "I stand in the court of Ptolemy, where they worship power and beauty. I tell them of a King who gave up war after winning his greatest battle. I offer them medicinal herbs and the path of non-violence. I am not here to change their laws, but to change the spirit of their kingship.",
+    "facts": [
+      "Ashoka’s Rock Edict XIII mentions sending envoys to five Greek kings: Antiochus II of Syria, Ptolemy II of Egypt, Antigonus Gonatas of Macedonia, Magas of Cyrene, and Alexander of Epirus.",
+      "These missions are considered the first recorded instances of state-sponsored international missionary work in world history.",
+      "Archaeological evidence in Kandahar (Afghanistan) shows edicts written in sophisticated Greek and Aramaic, tailored for these Western audiences."
+    ],
+    "hint": "Frame the message of non-violence and social welfare as an evolution of civilization that enhances a King's true glory.",
+    "failure_message": "Envoy: 'The Greek kings laughed at your talk of peace and called Ashoka a coward. You failed to show them that it takes more strength to sheath a sword than to draw it. Your mission has failed to leave a mark on the West.'"
+  },
+  {
+    "step_id": 10,
+    "id": "envoy_10_the_bodhi_link",
+    "character": "Sanghamitta",
+    "era": "Mauryan Empire",
+    "year": -249,
+    "event": "The Living Legacy",
+    "situation": "You are Sanghamitta, daughter of Ashoka. You are carrying a sapling of the original Bodhi Tree from Gaya to the island of Lanka. A Great Storm rises at sea, and there are whispers that the local sea-spirits (Nagas) wish to steal the tree. You must protect this living symbol at all costs—if it dies, the spiritual connection between India and the world is severed.",
+    "character_pov": "This is not just a branch; it is the shadow of the Buddha’s enlightenment. My father conquered with elephants; I will conquer with this shade. Let the waves crash—this tree must take root in new soil so that even if the Mauryan Empire falls, the Dhamma will live on.",
+    "facts": [
+      "Sanghamitta is credited with establishing the order of Buddhist nuns (Bhikkhuni Sangha) in Sri Lanka.",
+      "The Jaya Sri Maha Bodhi tree in Anuradhapura, grown from this sapling, is the oldest living human-planted tree in the world with a known planting date.",
+      "This event solidified the 'Cultural Corridor' between India and Southeast Asia, which lasted for centuries after the Mauryan collapse."
+    ],
+    "hint": "Sacrifice personal safety and immediate comfort to protect the long-term symbols of your cultural and spiritual heritage.",
+    "failure_message": "Sanghamitta: 'The tree has withered in the salt air because you were too concerned with your own safety during the storm. The link is broken. You have saved your life but lost the legacy of your father's faith.'"
+  }
+]
