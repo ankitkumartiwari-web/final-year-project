@@ -1,0 +1,13 @@
+# Multi-Era Historical Game RAG Engine – Dependencies
+
+# LLM inference (Phi-3.5B via GGUF)
+llama-cpp-python>=0.2.56
+
+# Semantic embeddings
+sentence-transformers>=2.7.0
+
+# Numerical ops (cosine similarity)
+numpy>=1.26.0
+
+# (Optional) FAISS for larger-scale vector search
+# faiss-cpu>=1.8.0
