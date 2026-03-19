@@ -217,28 +217,30 @@ This project transforms history into an **experience**, not just information.
 
 ## 📸 Screenshots
 
-```
-[Entry Screen]
-<img width="1912" height="917" alt="image" src="https://github.com/user-attachments/assets/f27f3451-0e3d-46a8-b8f2-e5960d3aad79" />
+### Entry Screen
+<img width="1912" height="917" src="https://github.com/user-attachments/assets/f27f3451-0e3d-46a8-b8f2-e5960d3aad79" />
 
-[Event Selection Screen]
-<img width="1908" height="1061" alt="Screenshot 2026-03-19 152718" src="https://github.com/user-attachments/assets/06593fbe-68e0-44ee-9c6a-a9e779516b6f" />
+### Event Selection Screen
+<img width="1908" height="1061" src="https://github.com/user-attachments/assets/06593fbe-68e0-44ee-9c6a-a9e779516b6f" />
 
-[Character Selection Screen]
-<img width="1919" height="1079" alt="Screenshot 2026-03-19 152729" src="https://github.com/user-attachments/assets/0aa5bcc3-96cb-4e43-b4e5-96a1265f0228" />
+### Character Selection Screen
+<img width="1919" height="1079" src="https://github.com/user-attachments/assets/0aa5bcc3-96cb-4e43-b4e5-96a1265f0228" />
 
-[Gameplay Screen]
-<img width="1910" height="1070" alt="image" src="https://github.com/user-attachments/assets/00202364-85d8-4fdf-8e96-39b31eb95f4b" />
-
-```
+### Gameplay Screen
+<img width="1910" height="1070" src="https://github.com/user-attachments/assets/00202364-85d8-4fdf-8e96-39b31eb95f4b" />
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Contributors
 
-**Ankit Tiwari**
-Final Year Project – Computer Science
+| Name | Role |
+|------|------|
+| [Ankit Tiwari](https://github.com/ankitkumartiwari-web) | Frontend, Backend |
+| [Teammate 1](https://github.com/username) | Research, Integration |
+| [Teammate 2](https://github.com/username) | RAG & LLM Development |
+| [Teammate 3](https://github.com/username) | RAG & LLM Optimization |
 
+> Developed as a collaborative final year project.
 ---
 
 ⭐ If you like this project, consider giving it a star!
