@@ -236,9 +236,9 @@ This project transforms history into an **experience**, not just information.
 | Name | Role |
 |------|------|
 | [Ankit Tiwari](https://github.com/ankitkumartiwari-web) | Frontend, Backend |
-| [Teammate 1](https://github.com/username) | Research, Integration |
-| [Teammate 2](https://github.com/username) | RAG & LLM Development |
-| [Teammate 3](https://github.com/username) | RAG & LLM Optimization |
+| [Arya Kurtadikar](https://github.com/AryaUK-004) | Research, Integration |
+| [Sam Khair](https://github.com/Samrile) | RAG & LLM Development |
+| [Ayush Shinde](https://github.com/AyushShinde2004) | RAG & LLM Optimization |
 
 > Developed as a collaborative final year project.
 ---
