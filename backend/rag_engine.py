@@ -85,12 +85,18 @@ class HistoricalRAGEngine:
     def __init__(
         self,
         data_root: str = "data",
-        model_path: str = "models/phi-3.5-mini-instruct.Q4_K_M.gguf",
+        model_path: Optional[str] = None,
         embedding_model: str = "all-MiniLM-L6-v2",
         n_ctx: int = 4096,
         n_gpu_layers: int = -1,
     ):
         self.data_root = Path(data_root)
+        if model_path is None:
+            model_path = str(
+                Path(__file__).resolve().parent
+                / "models"
+                / "Phi-3.5-mini-instruct.Q4_K_M.gguf"
+            )
 
         print("[RAG] Loading embedding model …")
         self.embedder = SentenceTransformer(embedding_model)
