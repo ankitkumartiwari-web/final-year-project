@@ -15,7 +15,7 @@ interface CharacterSelectionScreenProps {
   onCharacterSelected: (character: Character) => void;
 }
 
-const charactersByEvent: Record<string, Character[]> = {
+export const charactersByEvent: Record<string, Character[]> = {
   'mauryan-empire': [
     {
       id: 'ashoka',
@@ -121,6 +121,9 @@ const charactersByEvent: Record<string, Character[]> = {
     },
   ],
 };
+
+export const getCharacterByEventAndId = (eventId: string, characterId: string) =>
+  (charactersByEvent[eventId] || []).find((character) => character.id === characterId) ?? null;
 
 export function CharacterSelectionScreen({
   event,

@@ -8,12 +8,12 @@ import { HistoricalEvent } from './EventSelectionScreen';
 import { Character } from './CharacterSelectionScreen';
 import { AlertCircle, Sparkles, Loader2 } from 'lucide-react';
 
-// ── Types ─────────────────────────────────────────────────────────────────────
-
 interface StoryGameplayScreenProps {
   event: HistoricalEvent;
   character: Character;
   onRestart: () => void;
+  loadSavedGame?: boolean;
+  onSaveStateChange?: () => Promise<void> | void;
 }
 
 interface StorySegment {
@@ -30,6 +30,12 @@ interface StepData {
   year?: number;
 }
 
+interface ProgressData {
+  current_step: number;
+  total_steps: number;
+  pct_complete: number;
+}
+
 interface InputResponse {
   success: boolean;
   done: boolean;
@@ -42,14 +48,8 @@ interface InputResponse {
   attempts_left?: number;
 }
 
-// ── Config ────────────────────────────────────────────────────────────────────
-
 const API_BASE = 'http://localhost:8000';
 
-/**
- * Maps frontend event.id → backend era_id (your data/ folder names).
- * Update these to match your actual folder structure under backend/data/
- */
 const ERA_MAP: Record<string, string> = {
   'mauryan-empire': 'mauryan',
   'revolt-1857': 'revolt1857',
@@ -57,10 +57,6 @@ const ERA_MAP: Record<string, string> = {
   'ancient-civilizations': 'ancient',
 };
 
-/**
- * Maps frontend character.id → backend character_id (your JSON file names).
- * Update these to match your actual .json filenames under backend/data/<era>/
- */
 const CHARACTER_MAP: Record<string, string> = {
   ashoka: 'ashoka',
   soldier: 'soldier',
@@ -79,57 +75,137 @@ const CHARACTER_MAP: Record<string, string> = {
   chief: 'chief',
 };
 
-// ── Component ─────────────────────────────────────────────────────────────────
+const buildStepNarrative = (step: StepData) => {
+  const yearLabel = step.year != null
+    ? `${Math.abs(step.year)} ${step.year < 0 ? 'BCE' : 'CE'} - `
+    : '';
 
-export function StoryGameplayScreen({ event, character, onRestart }: StoryGameplayScreenProps) {
+  return [
+    step.event ? `Chronicle: ${yearLabel}${step.event}` : '',
+    step.situation ?? '',
+    step.character_pov ?? '',
+  ].filter(Boolean).join('\n\n');
+};
+
+export function StoryGameplayScreen({
+  event,
+  character,
+  onRestart,
+  loadSavedGame = false,
+  onSaveStateChange,
+}: StoryGameplayScreenProps) {
   const [story, setStory] = useState<StorySegment[]>([]);
   const [command, setCommand] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [gameReady, setGameReady] = useState(false); // true only after /start succeeds
+  const [isSaving, setIsSaving] = useState(false);
+  const [gameReady, setGameReady] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const [progress, setProgress] = useState<{ current_step: number; total_steps: number; pct_complete: number } | null>(null);
+  const [progress, setProgress] = useState<ProgressData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom whenever story updates
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [story]);
 
-  // Keep the command input focused whenever the game is ready and not complete,
-  // so the player can keep typing without clicking after pressing Enter.
   useEffect(() => {
     if (gameReady && !isComplete && !isLoading && inputRef.current) {
       inputRef.current.focus();
     }
   }, [gameReady, isComplete, isLoading]);
 
-  // Call /start when the component mounts
   useEffect(() => {
-    startGame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const initializeGame = async () => {
+      setIsLoading(true);
+      setError(null);
+      setStory([]);
+      setIsComplete(false);
+      setProgress(null);
+      setGameReady(false);
+      setSaveMessage(null);
 
-  // ── /start ──────────────────────────────────────────────────────────────────
-  const startGame = async () => {
-    setIsLoading(true);
+      try {
+        const res = loadSavedGame
+          ? await fetch(`${API_BASE}/load`, { method: 'POST' })
+          : await fetch(`${API_BASE}/start`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                era_id: ERA_MAP[event.id] ?? event.id,
+                character_id: CHARACTER_MAP[character.id] ?? character.id,
+              }),
+            });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.detail ?? `Server error ${res.status}`);
+        }
+
+        const data = await res.json();
+        if (loadSavedGame && !data.success) {
+          throw new Error(data.message ?? 'No saved game found');
+        }
+
+        const nextProgress: ProgressData | null = data.progress ?? data.state ?? null;
+        if (nextProgress) {
+          setProgress(nextProgress);
+        }
+
+        const step: StepData | undefined = data.current_step_data ?? data.first_step;
+        if (step && !step.done) {
+          setStory([{
+            text: loadSavedGame
+              ? `Saved progress restored.\n\n${buildStepNarrative(step)}`
+              : buildStepNarrative(step),
+            type: 'narrative',
+          }]);
+          setGameReady(true);
+        } else if (step?.done) {
+          setIsComplete(true);
+          setGameReady(true);
+          setStory([{
+            text: 'This saved journey is already complete. You can restart or begin a new timeline.',
+            type: 'success',
+          }]);
+        }
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Connection failed';
+        setError(msg);
+        setStory([{
+          text: `Could not connect to the game server.\n\n${msg}\n\nMake sure the backend is running:\n  cd backend\n  uvicorn main:app --reload --port 8000`,
+          type: 'hint',
+        }]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeGame();
+  }, [character.id, event.id, loadSavedGame]);
+
+  const handleSaveGame = async () => {
+    if (!gameReady || isLoading || isSaving) return;
+
+    setIsSaving(true);
+    setSaveMessage(null);
     setError(null);
-    setStory([]);
-    setIsComplete(false);
-    setProgress(null);
-    setGameReady(false);
-
-    const era_id = ERA_MAP[event.id] ?? event.id;
-    const character_id = CHARACTER_MAP[character.id] ?? character.id;
 
     try {
-      const res = await fetch(`${API_BASE}/start`, {
+      const res = await fetch(`${API_BASE}/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ era_id, character_id }),
+        body: JSON.stringify({
+          metadata: {
+            event_id: event.id,
+            event_title: event.title,
+            character_id: character.id,
+            character_name: character.name,
+          },
+        }),
       });
 
       if (!res.ok) {
@@ -137,46 +213,24 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
         throw new Error(err.detail ?? `Server error ${res.status}`);
       }
 
-      const data: { message: string; state: typeof progress; first_step: StepData } = await res.json();
-
-      // Update progress bar
-      if (data.state) setProgress(data.state);
-
-      // Build the intro from the first step fields
-      const step = data.first_step;
-      if (step && !step.done) {
-        const yearLabel = step.year != null
-          ? `${Math.abs(step.year)} ${step.year < 0 ? 'BCE' : 'CE'} — `
-          : '';
-        const introText = [
-          step.event ? `📜 ${yearLabel}${step.event}` : '',
-          step.situation ?? '',
-          step.character_pov ?? '',
-        ].filter(Boolean).join('\n\n');
-
-        setStory([{ text: introText, type: 'narrative' }]);
-        setGameReady(true); // ✅ only enable input after /start fully succeeds
-      }
+      setSaveMessage('Progress saved to the current single-player slot.');
+      await onSaveStateChange?.();
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Connection failed';
+      const msg = err instanceof Error ? err.message : 'Could not save progress';
       setError(msg);
-      setStory([{
-        text: `⚠️ Could not connect to the game server.\n\n${msg}\n\nMake sure the backend is running:\n  cd backend\n  uvicorn main:app --reload --port 8000`,
-        type: 'hint',
-      }]);
+      setSaveMessage(null);
     } finally {
-      setIsLoading(false);
+      setIsSaving(false);
     }
   };
 
-  // ── /input ──────────────────────────────────────────────────────────────────
   const handleCommand = async () => {
     if (!command.trim() || isLoading || isComplete || !gameReady) return;
 
     const userCommand = command.trim();
     setCommand('');
+    setSaveMessage(null);
 
-    // Show the player's command immediately
     setStory((prev) => [...prev, { text: `> ${userCommand}`, type: 'narrative' }]);
     setIsLoading(true);
     setError(null);
@@ -194,11 +248,8 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
       }
 
       const data: InputResponse = await res.json();
-
-      // Append the LLM narrative or the hint
       setStory((prev) => [...prev, { text: data.response, type: data.type }]);
 
-      // If the backend provided a progressive clue, show it as a separate hint block
       if (data.progressive_hint) {
         setStory((prev) => [
           ...prev,
@@ -209,32 +260,22 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
         ]);
       }
 
-      // If step advanced, show the next situation as a new narrative block
       if (data.step_advanced && data.next_step && !data.next_step.done) {
-        const next = data.next_step;
-        const yearLabel = next.year != null
-          ? `${Math.abs(next.year)} ${next.year < 0 ? 'BCE' : 'CE'} — `
-          : '';
-        const nextText = [
-          next.event ? `📜 ${yearLabel}${next.event}` : '',
-          next.situation ?? '',
-          next.character_pov ?? '',
-        ].filter(Boolean).join('\n\n');
-
-        setStory((prev) => [...prev, { text: nextText, type: 'narrative' }]);
+        setStory((prev) => [
+          ...prev,
+          { text: buildStepNarrative(data.next_step), type: 'narrative' },
+        ]);
       }
 
-      // Fetch updated progress
       const prog = await fetch(`${API_BASE}/progress`).then((r) => r.json());
       setProgress(prog);
 
-      // Journey complete
       if (data.done) {
         setIsComplete(true);
         setStory((prev) => [
           ...prev,
           {
-            text: `✨ Your journey through history is complete!\nYou have witnessed key moments of "${event.title}" through the eyes of ${character.name}.`,
+            text: `Your journey through history is complete.\nYou have witnessed key moments of "${event.title}" through the eyes of ${character.name}.`,
             type: 'success',
           },
         ]);
@@ -242,13 +283,12 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Unknown error';
       setError(msg);
-      setStory((prev) => [...prev, { text: `⚠️ Error: ${msg}`, type: 'hint' }]);
+      setStory((prev) => [...prev, { text: `Error: ${msg}`, type: 'hint' }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -261,7 +301,6 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
         fontFamily: 'Merriweather, serif',
       }}
     >
-      {/* ── Header ── */}
       <div
         className="relative h-24 md:h-32 flex items-end p-4 md:p-6 flex-shrink-0"
         style={{
@@ -279,14 +318,13 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
             <p className="text-amber-200 text-sm md:text-base">Playing as: {character.name}</p>
             {progress && (
               <p className="text-amber-300 text-xs">
-                Step {progress.current_step} / {progress.total_steps} &bull; {progress.pct_complete}%
+                Step {Math.min(progress.current_step + 1, progress.total_steps)} / {progress.total_steps} &bull; {progress.pct_complete}%
               </p>
             )}
           </div>
         </div>
       </div>
 
-      {/* ── Progress bar ── */}
       {progress && (
         <div className="h-1 bg-amber-200 flex-shrink-0">
           <motion.div
@@ -298,10 +336,7 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
         </div>
       )}
 
-      {/* ── Main content ── */}
       <div className="flex-1 flex flex-col lg:flex-row gap-4 md:gap-6 p-4 md:p-6 overflow-hidden">
-
-        {/* 3D Model panel */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -326,13 +361,12 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-900/90 to-transparent p-3 md:p-4 z-10"
             >
               <p className="text-amber-100 text-xs md:text-sm italic text-center" style={{ fontFamily: 'Crimson Text, serif' }}>
-                {event.title} • {event.period}
+                {event.title} � {event.period}
               </p>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Narrative scroll panel */}
         <div className="flex-1 flex flex-col overflow-hidden min-h-0">
           <div
             ref={scrollRef}
@@ -379,7 +413,6 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
               </motion.div>
             ))}
 
-            {/* Spinner while LLM is generating */}
             {isLoading && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -387,17 +420,17 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
                 className="flex items-center gap-2 text-amber-700 py-2"
               >
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm italic">The narrator weaves your story…</span>
+                <span className="text-sm italic">The narrator weaves your story...</span>
               </motion.div>
             )}
           </div>
         </div>
       </div>
 
-      {/* ── Command input ── */}
       <div className="flex-shrink-0 p-4 md:p-6 pt-0">
         <div className="max-w-7xl mx-auto space-y-2 md:space-y-3">
           {error && <p className="text-red-600 text-xs">{error}</p>}
+          {saveMessage && <p className="text-green-700 text-xs">{saveMessage}</p>}
           <div className="flex gap-2 md:gap-3">
             <Input
               ref={inputRef}
@@ -408,10 +441,10 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
                 isComplete
                   ? 'Journey complete!'
                   : !gameReady
-                  ? 'Loading character data… please wait'
+                  ? 'Loading character data... please wait'
                   : isLoading
-                  ? 'Awaiting the narrator… you can queue your next action'
-                  : 'Type your action (e.g., "march forward")…'
+                  ? 'Awaiting the narrator... you can queue your next action'
+                  : 'Type your action (e.g., "march forward")...'
               }
               disabled={isComplete || !gameReady}
               className="flex-1 border-2 border-amber-600/50 focus:border-amber-700 bg-amber-50/80 text-sm md:text-base disabled:opacity-60"
@@ -425,11 +458,20 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
             >
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Act'}
             </Button>
+            <Button
+              onClick={handleSaveGame}
+              disabled={!gameReady || isLoading || isSaving}
+              variant="outline"
+              className="border-amber-600 text-amber-900 hover:bg-amber-100 text-xs md:text-sm disabled:opacity-60"
+              style={{ fontFamily: 'Merriweather, serif' }}
+            >
+              {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Save'}
+            </Button>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-amber-800 text-xs md:text-sm">
               {isComplete
-                ? '✨ Your historical journey is complete'
+                ? 'Your historical journey is complete'
                 : 'Describe your action to shape history'}
             </p>
             <Button
@@ -446,3 +488,4 @@ export function StoryGameplayScreen({ event, character, onRestart }: StoryGamepl
     </motion.div>
   );
 }
+

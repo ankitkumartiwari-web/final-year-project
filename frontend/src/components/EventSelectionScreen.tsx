@@ -14,7 +14,7 @@ interface EventSelectionScreenProps {
   onEventSelected: (event: HistoricalEvent) => void;
 }
 
-const historicalEvents: HistoricalEvent[] = [
+export const historicalEvents: HistoricalEvent[] = [
   {
     id: 'mauryan-empire',
     title: 'The Mauryan Empire',
@@ -44,6 +44,9 @@ const historicalEvents: HistoricalEvent[] = [
     period: '3300-500 BCE',
   },
 ];
+
+export const getHistoricalEventById = (eventId: string) =>
+  historicalEvents.find((event) => event.id === eventId) ?? null;
 
 export function EventSelectionScreen({ onEventSelected }: EventSelectionScreenProps) {
   const handleEventClick = (event: HistoricalEvent) => {

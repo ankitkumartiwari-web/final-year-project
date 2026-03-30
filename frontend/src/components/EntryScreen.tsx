@@ -1,12 +1,25 @@
 import { motion } from 'motion/react';
 import { useEffect } from 'react';
+import { Button } from './ui/button';
 
 interface EntryScreenProps {
   onBeginJourney: () => void;
+  onContinueJourney?: () => void;
+  hasSavedGame?: boolean;
+  savedGameLabel?: string | null;
 }
 
-export function EntryScreen({ onBeginJourney }: EntryScreenProps) {
+export function EntryScreen({
+  onBeginJourney,
+  onContinueJourney,
+  hasSavedGame = false,
+  savedGameLabel = null,
+}: EntryScreenProps) {
   useEffect(() => {
+    if (hasSavedGame) {
+      return;
+    }
+
     // Automatically proceed after 2 seconds
     const timer = setTimeout(() => {
       onBeginJourney();
@@ -14,7 +27,7 @@ export function EntryScreen({ onBeginJourney }: EntryScreenProps) {
 
     // Cleanup timer if component unmounts
     return () => clearTimeout(timer);
-  }, [onBeginJourney]);
+  }, [hasSavedGame, onBeginJourney]);
 
   return (
     <motion.div
@@ -29,7 +42,7 @@ export function EntryScreen({ onBeginJourney }: EntryScreenProps) {
         backgroundPosition: 'center',
         fontFamily: 'Merriweather, serif',
       }}
-      onClick={onBeginJourney}
+      onClick={!hasSavedGame ? onBeginJourney : undefined}
     >
       {/* Overlay for better readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-amber-900/20 via-transparent to-amber-900/30" />
@@ -72,6 +85,40 @@ export function EntryScreen({ onBeginJourney }: EntryScreenProps) {
         >
           Step into the past and relive great moments of history.
         </motion.p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {hasSavedGame && onContinueJourney && (
+            <Button
+              onClick={onContinueJourney}
+              className="bg-amber-700 hover:bg-amber-800 text-amber-50 px-6 py-5 text-base"
+              style={{ fontFamily: 'Merriweather, serif' }}
+            >
+              Continue Saved Journey
+            </Button>
+          )}
+          <Button
+            onClick={onBeginJourney}
+            variant={hasSavedGame ? 'outline' : 'default'}
+            className={hasSavedGame
+              ? 'border-amber-200 text-amber-50 hover:bg-amber-100/10 px-6 py-5 text-base'
+              : 'bg-amber-700 hover:bg-amber-800 text-amber-50 px-6 py-5 text-base'}
+            style={{ fontFamily: 'Merriweather, serif' }}
+          >
+            Start New Journey
+          </Button>
+        </div>
+
+        {hasSavedGame && savedGameLabel && (
+          <p
+            className="mt-4 text-sm italic"
+            style={{
+              color: '#f5deb3',
+              textShadow: '0 0 10px rgba(139, 69, 19, 0.6)',
+            }}
+          >
+            Saved game: {savedGameLabel}
+          </p>
+        )}
       </motion.div>
 
       {/* Decorative elements */}

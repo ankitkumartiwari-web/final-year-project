@@ -21,7 +21,6 @@ Threshold ladder (relaxes with each failed attempt):
 """
 
 import json
-import os
 import numpy as np
 from pathlib import Path
 from dataclasses import dataclass, field, fields
@@ -125,6 +124,19 @@ class HistoricalRAGEngine:
         # Embedding cache: step_id → list of 3 hint embeddings (one per attempt level)
         self._hint_embeddings: dict[int, list[np.ndarray]] = {}
 
+    def _validate_restored_state(self, state: GameState) -> GameState:
+        """Clamp restored progress to the currently loaded journey definition."""
+        max_step_index = len(self.steps)
+        state.current_step = max(0, min(state.current_step, max_step_index))
+
+        valid_step_ids = {step.step_id for step in self.steps}
+        state.step_attempts = {
+            int(step_id): int(attempts)
+            for step_id, attempts in state.step_attempts.items()
+            if int(step_id) in valid_step_ids
+        }
+        return state
+
     # ── Loading ────────────────────────────────
 
     def _generate_progressive_hints(self, step: JourneyStep) -> list[str]:
@@ -218,6 +230,38 @@ class HistoricalRAGEngine:
 
         self.state = GameState(character_id=character_id, era_id=era_id)
         return self.state
+
+    def restore_state(self, state_data: dict) -> GameState:
+        """Reload the saved journey definition and rehydrate the game state."""
+        character_id = state_data["character_id"]
+        era_id = state_data["era_id"]
+
+        self.load_character(character_id=character_id, era_id=era_id)
+
+        restored_state = GameState(
+            character_id=character_id,
+            era_id=era_id,
+            current_step=int(state_data.get("current_step", 0)),
+            history=list(state_data.get("history", [])),
+            step_attempts={
+                int(step_id): int(attempts)
+                for step_id, attempts in state_data.get("step_attempts", {}).items()
+            },
+        )
+        self.state = self._validate_restored_state(restored_state)
+        return self.state
+
+    def export_state(self) -> Optional[dict]:
+        if self.state is None:
+            return None
+
+        return {
+            "character_id": self.state.character_id,
+            "era_id": self.state.era_id,
+            "current_step": self.state.current_step,
+            "history": self.state.history,
+            "step_attempts": self.state.step_attempts,
+        }
 
     # ── Core Gate Logic ────────────────────────
 
