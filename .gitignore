@@ -1,18 +1,39 @@
-# Python
-__pycache__/
-venv/
-.env
-*.pyc
-
-# Data / ML
-*.csv
-*.parquet
-*.zip
-*.pkl
-
-# VS Code
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
 .vscode/
 
-# OS
-Thumbs.db
-.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
+.venv/
+venv/
+env/
+
+# Backend local artifacts
+backend/models/
+backend/saves/
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+dist/
+.vite/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
