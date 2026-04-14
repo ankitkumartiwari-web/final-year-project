@@ -25,6 +25,7 @@ app.add_middleware(
 engine = HistoricalRAGEngine()
 SAVE_DIR = Path(__file__).resolve().parent / "saves"
 SAVE_PATH = SAVE_DIR / "current_game.json"
+active_save_metadata: "SaveMetadata | None" = None
 
 
 # ──────────────────────────────────────────────
@@ -75,12 +76,10 @@ def _read_save_file() -> dict | None:
 
 
 def _autosave_active_game():
-    save_data = _read_save_file()
-    if save_data is None or engine.state is None:
+    if active_save_metadata is None or engine.state is None:
         return
 
-    metadata = SaveMetadata(**save_data["metadata"])
-    _write_save_file(metadata)
+    _write_save_file(active_save_metadata)
 
 
 # ──────────────────────────────────────────────
@@ -94,7 +93,9 @@ def root():
 
 @app.post("/start")
 def start_game(data: StartRequest):
+    global active_save_metadata
     state = engine.load_character(data.character_id, data.era_id)
+    active_save_metadata = None
     return {
         "message": "Game started",
         "state": engine.get_progress(),
@@ -156,7 +157,9 @@ def get_saved_game():
 
 @app.post("/save")
 def save_game(data: SaveRequest):
+    global active_save_metadata
     _write_save_file(data.metadata)
+    active_save_metadata = data.metadata
     return {
         "message": "Game saved",
         "progress": engine.get_progress(),
@@ -165,6 +168,7 @@ def save_game(data: SaveRequest):
 
 @app.post("/load")
 def load_saved_game():
+    global active_save_metadata
     save_data = _read_save_file()
     if save_data is None:
         return {
@@ -175,16 +179,7 @@ def load_saved_game():
     state = engine.restore_state(save_data["state"])
     current_step = engine.present_step()
     progress = engine.get_progress()
-
-    refreshed_payload = {
-        "metadata": save_data["metadata"],
-        "state": engine.export_state(),
-        "progress": progress,
-        "current_step_data": current_step,
-    }
-    SAVE_DIR.mkdir(parents=True, exist_ok=True)
-    with open(SAVE_PATH, "w", encoding="utf-8") as save_file:
-        json.dump(refreshed_payload, save_file, indent=2, ensure_ascii=False)
+    active_save_metadata = SaveMetadata(**save_data["metadata"])
 
     return {
         "success": True,
@@ -198,6 +193,8 @@ def load_saved_game():
 
 @app.delete("/save")
 def clear_saved_game():
+    global active_save_metadata
     if SAVE_PATH.exists():
         SAVE_PATH.unlink()
+    active_save_metadata = None
     return {"message": "Saved game cleared"}

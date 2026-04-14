@@ -98,9 +98,9 @@ export function EntryScreen({
           )}
           <Button
             onClick={onBeginJourney}
-            variant={hasSavedGame ? 'outline' : 'default'}
+            variant="default"
             className={hasSavedGame
-              ? 'border-amber-200 text-amber-50 hover:bg-amber-100/10 px-6 py-5 text-base'
+              ? 'bg-amber-700 text-amber-50 hover:bg-amber-800 border border-amber-300 px-6 py-5 text-base shadow-lg'
               : 'bg-amber-700 hover:bg-amber-800 text-amber-50 px-6 py-5 text-base'}
             style={{ fontFamily: 'Merriweather, serif' }}
           >

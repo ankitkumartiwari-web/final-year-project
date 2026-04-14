@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { ThreeDModelViewer } from './ThreeDModelViewer';
 import { lowPolyModelUrl } from '../assets/lowPolyModel';
 import { Button } from './ui/button';
@@ -6,7 +6,7 @@ import { Input } from './ui/input';
 import { useState, useRef, useEffect } from 'react';
 import { HistoricalEvent } from './EventSelectionScreen';
 import { Character } from './CharacterSelectionScreen';
-import { AlertCircle, Sparkles, Loader2 } from 'lucide-react';
+import { AlertCircle, BookOpenText, Lightbulb, Loader2, Sparkles, Swords } from 'lucide-react';
 
 interface StoryGameplayScreenProps {
   event: HistoricalEvent;
@@ -16,9 +16,18 @@ interface StoryGameplayScreenProps {
   onSaveStateChange?: () => Promise<void> | void;
 }
 
+type StorySegmentTone =
+  | 'chronicle'
+  | 'prompt'
+  | 'guidance'
+  | 'clue'
+  | 'success'
+  | 'error';
+
 interface StorySegment {
   text: string;
   type: 'narrative' | 'hint' | 'success';
+  tone?: StorySegmentTone;
 }
 
 interface StepData {
@@ -85,6 +94,75 @@ const buildStepNarrative = (step: StepData) => {
     step.situation ?? '',
     step.character_pov ?? '',
   ].filter(Boolean).join('\n\n');
+};
+
+const getSegmentPresentation = (segment: StorySegment) => {
+  const tone = segment.tone
+    ?? (segment.type === 'success'
+      ? 'success'
+      : segment.type === 'hint'
+      ? 'guidance'
+      : segment.text.startsWith('>')
+      ? 'prompt'
+      : 'chronicle');
+
+  switch (tone) {
+    case 'prompt':
+      return {
+        containerClass: 'bg-stone-100/80 border-l-4 border-stone-500 p-3 md:p-4 rounded',
+        textClass: 'text-stone-900 italic',
+        label: 'Prompt',
+        labelClass: 'text-stone-800',
+        icon: Swords,
+        iconClass: 'text-stone-700',
+      };
+    case 'guidance':
+      return {
+        containerClass: 'bg-amber-100 border-l-4 border-amber-600 p-3 md:p-4 rounded',
+        textClass: 'text-amber-950',
+        label: 'Guidance',
+        labelClass: 'text-amber-900',
+        icon: AlertCircle,
+        iconClass: 'text-amber-700',
+      };
+    case 'clue':
+      return {
+        containerClass: 'bg-sky-50 border-l-4 border-sky-600 p-3 md:p-4 rounded',
+        textClass: 'text-sky-950',
+        label: 'Hint',
+        labelClass: 'text-sky-900',
+        icon: Lightbulb,
+        iconClass: 'text-sky-700',
+      };
+    case 'success':
+      return {
+        containerClass: 'bg-green-50 border-l-4 border-green-600 p-3 md:p-4 rounded',
+        textClass: 'text-green-900',
+        label: 'Success',
+        labelClass: 'text-green-900',
+        icon: Sparkles,
+        iconClass: 'text-green-700',
+      };
+    case 'error':
+      return {
+        containerClass: 'bg-red-50 border-l-4 border-red-600 p-3 md:p-4 rounded',
+        textClass: 'text-red-900',
+        label: 'Error',
+        labelClass: 'text-red-900',
+        icon: AlertCircle,
+        iconClass: 'text-red-700',
+      };
+    case 'chronicle':
+    default:
+      return {
+        containerClass: 'bg-amber-50/70 border-l-4 border-amber-300 p-3 md:p-4 rounded',
+        textClass: 'text-amber-950',
+        label: 'Chronicle',
+        labelClass: 'text-amber-900',
+        icon: BookOpenText,
+        iconClass: 'text-amber-700',
+      };
+  }
 };
 
 export function StoryGameplayScreen({
@@ -162,6 +240,7 @@ export function StoryGameplayScreen({
               ? `Saved progress restored.\n\n${buildStepNarrative(step)}`
               : buildStepNarrative(step),
             type: 'narrative',
+            tone: 'chronicle',
           }]);
           setGameReady(true);
         } else if (step?.done) {
@@ -170,6 +249,7 @@ export function StoryGameplayScreen({
           setStory([{
             text: 'This saved journey is already complete. You can restart or begin a new timeline.',
             type: 'success',
+            tone: 'success',
           }]);
         }
       } catch (err: unknown) {
@@ -178,6 +258,7 @@ export function StoryGameplayScreen({
         setStory([{
           text: `Could not connect to the game server.\n\n${msg}\n\nMake sure the backend is running:\n  cd backend\n  uvicorn main:app --reload --port 8000`,
           type: 'hint',
+          tone: 'error',
         }]);
       } finally {
         setIsLoading(false);
@@ -231,7 +312,7 @@ export function StoryGameplayScreen({
     setCommand('');
     setSaveMessage(null);
 
-    setStory((prev) => [...prev, { text: `> ${userCommand}`, type: 'narrative' }]);
+    setStory((prev) => [...prev, { text: `> ${userCommand}`, type: 'narrative', tone: 'prompt' }]);
     setIsLoading(true);
     setError(null);
 
@@ -248,7 +329,11 @@ export function StoryGameplayScreen({
       }
 
       const data: InputResponse = await res.json();
-      setStory((prev) => [...prev, { text: data.response, type: data.type }]);
+      setStory((prev) => [...prev, {
+        text: data.response,
+        type: data.type,
+        tone: data.type === 'success' ? 'success' : 'guidance',
+      }]);
 
       if (data.progressive_hint) {
         setStory((prev) => [
@@ -256,6 +341,7 @@ export function StoryGameplayScreen({
           {
             text: `Clue: ${data.progressive_hint}`,
             type: 'hint',
+            tone: 'clue',
           },
         ]);
       }
@@ -263,7 +349,7 @@ export function StoryGameplayScreen({
       if (data.step_advanced && data.next_step && !data.next_step.done) {
         setStory((prev) => [
           ...prev,
-          { text: buildStepNarrative(data.next_step), type: 'narrative' },
+          { text: buildStepNarrative(data.next_step), type: 'narrative', tone: 'chronicle' },
         ]);
       }
 
@@ -277,13 +363,14 @@ export function StoryGameplayScreen({
           {
             text: `Your journey through history is complete.\nYou have witnessed key moments of "${event.title}" through the eyes of ${character.name}.`,
             type: 'success',
+            tone: 'success',
           },
         ]);
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Unknown error';
       setError(msg);
-      setStory((prev) => [...prev, { text: `Error: ${msg}`, type: 'hint' }]);
+      setStory((prev) => [...prev, { text: `Error: ${msg}`, type: 'hint', tone: 'error' }]);
     } finally {
       setIsLoading(false);
     }
@@ -361,7 +448,7 @@ export function StoryGameplayScreen({
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-900/90 to-transparent p-3 md:p-4 z-10"
             >
               <p className="text-amber-100 text-xs md:text-sm italic text-center" style={{ fontFamily: 'Crimson Text, serif' }}>
-                {event.title} � {event.period}
+                {event.title} • {event.period}
               </p>
             </motion.div>
           </div>
@@ -373,45 +460,30 @@ export function StoryGameplayScreen({
             className="flex-1 space-y-3 md:space-y-4 p-4 md:p-6 rounded-lg border-2 border-amber-600/30 overflow-y-auto"
             style={{ backgroundColor: 'rgba(250, 246, 239, 0.9)' }}
           >
-            {story.map((segment, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className={`${
-                  segment.type === 'hint'
-                    ? 'bg-amber-100 border-l-4 border-amber-600 p-3 md:p-4 rounded'
-                    : segment.type === 'success'
-                    ? 'bg-green-50 border-l-4 border-green-600 p-3 md:p-4 rounded'
-                    : ''
-                }`}
-              >
-                {segment.type === 'hint' && (
-                  <div className="flex items-start gap-2 mb-2">
-                    <AlertCircle className="w-4 h-4 md:w-5 md:h-5 text-amber-700 flex-shrink-0 mt-1" />
-                    <span className="text-amber-900 text-sm md:text-base font-semibold">Guidance:</span>
-                  </div>
-                )}
-                {segment.type === 'success' && (
-                  <div className="flex items-start gap-2 mb-2">
-                    <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-green-700 flex-shrink-0 mt-1" />
-                    <span className="text-green-900 text-sm md:text-base font-semibold">Success!</span>
-                  </div>
-                )}
-                <p
-                  className={`text-sm md:text-base whitespace-pre-line ${
-                    segment.type === 'hint'
-                      ? 'text-amber-900'
-                      : segment.type === 'success'
-                      ? 'text-green-900'
-                      : 'text-amber-900'
-                  } ${segment.text.startsWith('>') ? 'italic text-amber-700' : ''}`}
+            {story.map((segment, index) => {
+              const presentation = getSegmentPresentation(segment);
+              const Icon = presentation.icon;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className={presentation.containerClass}
                 >
-                  {segment.text}
-                </p>
-              </motion.div>
-            ))}
+                  <div className="flex items-start gap-2 mb-2">
+                    <Icon className={`w-4 h-4 md:w-5 md:h-5 flex-shrink-0 mt-1 ${presentation.iconClass}`} />
+                    <span className={`text-sm md:text-base font-semibold ${presentation.labelClass}`}>
+                      {presentation.label}:
+                    </span>
+                  </div>
+                  <p className={`text-sm md:text-base whitespace-pre-line ${presentation.textClass}`}>
+                    {segment.text}
+                  </p>
+                </motion.div>
+              );
+            })}
 
             {isLoading && (
               <motion.div
@@ -488,4 +560,5 @@ export function StoryGameplayScreen({
     </motion.div>
   );
 }
+
 
