@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "event_id": "mauryan-empire",
+    "event_title": "The Mauryan Empire",
+    "character_id": "ashoka",
+    "character_name": "Emperor Ashoka"
+  },
+  "state": {
+    "character_id": "ashoka",
+    "era_id": "mauryan",
+    "current_step": 21,
+    "history": [
+      {
+        "step_id": 1,
+        "user_input": "Send peaceful messengers to foreign kings to share knowledge, medicine, and moral values",
+        "score": 0.2913,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 1,
+        "user_input": "Send peaceful messengers to foreign kings to share knowledge, medicine, and moral values",
+        "score": 0.2913,
+        "attempt": 2,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 1,
+        "user_input": "punish those who steals",
+        "score": 0.7626,
+        "attempt": 3,
+        "outcome": "success",
+        "narrative": "You stand amidst the bustling streets of ancient Ujjain, a city where the air is thick with the scent of spices and the clamor of merchants. As a guardian of Mauryan rule, you have sworn to uphold justice, and your first decree is clear: punish those who steal, for the prosperity of Ujjain depends on the integrity of its trade routes leading to the Arabian Sea. Your hands, clad in robes of responsibility, carry the weight of the state's trust. Behind you, the centralized authority of your Viceroy watches over the city, ensuring order through the wisdom of the Arthashastra, which dictates meticulous auditing to guard against embezzlement. As you move through the market, whispers of discontent are drowned by your resolve to maintain balance. But beware, for your vigil"
+      },
+      {
+        "step_id": 2,
+        "user_input": "Send your children on a mission to other countries to spread the message of peace and kindness.",
+        "score": 0.1032,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 2,
+        "user_input": "Show your military power and demand that the rebels surrender to your authority immediately",
+        "score": 0.6317,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "You step forward, your presence commanding the ancient dust-laden streets of Taxila, a city where Hellenistic ideas mingle with the deep wisdom of Vedic traditions. Your military might, a testament to the Mauryan might, is unparalleled here—your infantry stands firm, your cavalry roars with power, your chariots thunder down the cobbled roads, and your war elephants trumpet a call to arms that echoes through the bazaar. The citizens, fearful of your ruthless reputation, look to you for salvation amidst their turmoil. The time for words has passed; it is now for action. With a voice as commanding as the ripples on the Oxus, you decree: \"Show your military power and demand that the rebels surrender to your authority immediately.\" As the dust settles and your forces converge, you glimpse the distant"
+      },
+      {
+        "step_id": 3,
+        "user_input": "Remove all other rivals to the throne to ensure you are the only ruler of the empire.",
+        "score": 0.6402,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "As you stand before the marbled throne room, the weight of an empire rests upon your shoulders. You've heard the whispers of Ashoka's dark past, where the Mahavamsa recounts the grim tale of fratricide to secure power. With a mind as sharp as the royal swords of old, you understand the gravity of your quest. Your hand, steady and resolute, reaches out, and with a silent command, you signal your trusted confidant, Radhagupta. Together, you orchestrate a coup that would echo through the annals of history, ensuring that only you remain the unchallenged sovereign. Amidst the chaos of fallen brothers, your eyes lock with those of Vitashoka, the youngest and sole survivor, his fate hanging by a thread. The challenge before you now is not just to claim the throne but to navigate the treacherous"
+      },
+      {
+        "step_id": 4,
+        "user_input": "Declare that you rule by divine right and bring all government power under your personal control",
+        "score": 0.6433,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "As you stand resolute, declaring that you rule by divine right and bring all government power under your personal control, you feel the weight of history upon your shoulders. The air is thick with anticipation, as the year has stretched longer than usual, a testament to the fierce internal power struggle that has delayed your formal coronation. It is a moment of patience, for your destiny is bound to the fates of those who have come before you. Embracing the title 'Devanampiya Piyadasi' (Beloved of the Gods, He who looks with kindness), a mantle of majesty as timeless as the Mauryan dynasty itself, you are ready to ascend. Your coronation is not merely a ceremony; it is the fulfillment of a prophecy, the moment when the Maurya dynasty transcends its regional roots to assert its dominion across the vast expanse of India."
+      },
+      {
+        "step_id": 5,
+        "user_input": "Take control of neighboring lands and secure trade routes to make the empire larger.",
+        "score": 0.7751,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "As you grasp the reins of power, your gaze sweeps over the vast expanse of the Mauryan Empire, a realm where you, as its new sovereign, stand at the helm of a domain almost as boundless as the ancient subcontinent itself. From the bustling markets of Pataliputra to the rugged terrains of the Deccan plateau, your ambition to extend the empire's reach is not just a dream. It is a grand vision that requires the coordination of legions of infantry and the steadfast might of elephants, all marching in unison through the undulating landscapes.\n\nYet, remember, your forces are but one piece of a grander puzzle; the empire thrives on the tribute and allegiance of a sprawling network of tributary states, each a thread in the intricate tapestry of your bur"
+      },
+      {
+        "step_id": 6,
+        "user_input": "Set up a system of secret agents to watch everyone and stop threats before they start",
+        "score": 0.4723,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 6,
+        "user_input": "Set up a system of secret agents to watch everyone and stop threats before they start",
+        "score": 0.4723,
+        "attempt": 2,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 6,
+        "user_input": "Set up a system of secret agents to watch everyone and stop threats before they start",
+        "score": 0.8597,
+        "attempt": 3,
+        "outcome": "success",
+        "narrative": "As you've wisely set up a network of secret agents, adopting the ancient wisdom from the Arthashastra, you've woven a web of vigilance that spans beyond mere external threats. These agents, in the guise of monks, merchants, students, and even 'poison girls', move unseen, their ears tuned to whispers of dissent within the palace walls and the courtyards of governance. You've not only safeguarded the empire's borders but ensured the loyalty of the Amatyas, those trusted officials whose whispers could topple dynasties. Your foresight rivals that of Ashoka, whose reign was marked by an iron grip on bureaucracy, maintained by your ever-watchful eyes.\n\nBut beware, for this empire is vast and its secrets deep. As dusk falls, your agents report an"
+      },
+      {
+        "step_id": 7,
+        "user_input": "Choose a full military invasion to force the defiant kingdom of Kalinga to join your empire",
+        "score": 0.5363,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 7,
+        "user_input": "Choose a full military invasion to force the defiant kingdom of Kalinga to join your empire",
+        "score": 0.6006,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "You stand resolute, the weight of your empire's ambition pressing upon your shoulders. With a steady hand, you command your legions, aware that their might is matched only by the formidable resistance you face. The kingdom of Kalinga, with its prosperous republic and mighty monarchy, has long been a bastion of independence, controlling the lifeblood of commerce across the seas to Suvarnabhumi. Its vast standing army and naval mastery have defied empires for centuries, a testament to its unyielding spirit. As your forces gather, you can't help but feel the echo of history—the relentless defiance of a land that has remained sovereign since the days of Chandragupta Maurya. With the fate of nations at your feet, you prepare for the ultimate challenge: to either forge an unbreakable bond or to witness the fall of an empire"
+      },
+      {
+        "step_id": 8,
+        "user_input": "Use all available resources and war elephants to launch a massive attack on Kalinga.",
+        "score": 0.4881,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 8,
+        "user_input": "Use all available resources and war elephants to launch a massive attack on Kalinga.",
+        "score": 0.5782,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "With the sun casting long shadows over the battlefield, you marshal your forces, the Mauryan army at your command. You've meticulously assembled a vast logistical train, your blacksmiths hammering weapons with precision, your doctors readying for the inevitable casualties, and your supply keepers ensuring each warrior has what they need. The roar of your war elephants, the ancient 'tanks' of India, fills the air as they charge, their trunks and tusks ready to break infantry lines and crush the Kalinga fortifications beneath their might. Amidst the clashing of steel and the thunderous stampede of elephants, Ashoka's legions, numbering over 600,000, stand resolute and unwavering. The ground trembles under the weight of your advance, but the battle is far"
+      },
+      {
+        "step_id": 9,
+        "user_input": "Order a final, direct assault on the city to win the war quickly, no matter the cost.\"",
+        "score": 0.4847,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 9,
+        "user_input": "Order a final, direct assault on the city to win the war quickly, no matter the cost.",
+        "score": 0.6046,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "You command your legion to order a final, direct assault on the city, your strategy echoing the boldness of your ancestors. The air is thick with anticipation, for this is no mere skirmish but a battle reminiscent of the ferocious clash at Kalinga, where the echoes of history whisper tales of unparalleled bloodshed. Around you, the ancient implements of war stand ready: the Sataghnis, poised to hurl stones with lethal precision, and warriors adorned with fiery armaments that belch flames towards the city walls. The very ground trembles as Kalinga's defenders, embracing the concept of total war, rally with unyielding resolve, their entire society united in the quest for survival. The city stands as a testament to human endurance, and the cost of victory looms large—a price paid by"
+      },
+      {
+        "step_id": 10,
+        "user_input": "Face the reality of the violence and admit that you feel deep regret for the lives lost.",
+        "score": 0.5019,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 10,
+        "user_input": "Face the reality of the violence and admit that you feel deep regret for the lives lost.",
+        "score": 0.5019,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "As you stand before the remnants of the once-mighty Kalinga, the air grows heavy with the weight of history. The scorching sun beats down upon your skin, yet it is not the heat that causes your heart to race, but the realization of the carnage that has unfolded here. You gaze upon the Daya River, its waters a macabre shade of crimson, a grim testament to the lives that have been claimed in the throes of conflict. Inscribed upon the nearby stone, Rock Edict XIII whispers Ashoka's own words of pachattapa, a profound sorrow that echoes through the ages. This harrowing sight, so vivid and so vile, has shattered the very core of your being, compelling you to question the cost of power and conquest. With your newfound understanding of the depths of human suffering, you must now"
+      },
+      {
+        "step_id": 11,
+        "user_input": "Stop all future wars and focus on healing your conscience instead of winning more glory.",
+        "score": 0.4379,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 11,
+        "user_input": "Stop all future wars and focus on healing your conscience instead of winning more glory.",
+        "score": 0.5371,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "You halt your march, the clamor of battle fading as your heart bears the weight of untold sorrow. This is the moment Ashoka recognizes the depth of 'Pachattapa,' a remorse so profound it echoes through the annals of time. You, too, feel the stirrings of change within your soul, abandoning the relentless pursuit of victory and glory. No longer do you seek the thrill of 'Vihara Yatras,' the hunt for triumph that once defined your days. The echoes of 'Bherighosha' are replaced by the harmonious hum of 'Dhammaghosha,' a symphony of righteousness that guides your newfound path. As you stand at this crossroads of conscience, you embrace the daunting task ahead: to sow the seeds of peace and compassion across lands once scarred by the sword"
+      },
+      {
+        "step_id": 12,
+        "user_input": "Follow the path of non-violence and accept the peaceful teachings of the monk.",
+        "score": 0.4273,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 12,
+        "user_input": "Pass new laws that ban animal sacrifice and protect the lives of all living creatures.",
+        "score": 0.257,
+        "attempt": 2,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 12,
+        "user_input": "Pass new laws that ban animal sacrifice and protect the lives of all living creatures.",
+        "score": 0.257,
+        "attempt": 3,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 13,
+        "user_input": "Pass new laws that ban animal sacrifice and protect the lives of all living creatures.",
+        "score": 0.6155,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "As you, the chosen sovereign, step forward with resolve, your hands clasp the chisel that has been your silent ally. Your edict, now etched in stone, will echo through the ages: \"Pass new laws that ban animal sacrifice and protect the lives of all living creatures.\" With Major Rock Edict I as your guide, you've taken a bold stride, mirroring the wisdom of your predecessors. Here, in the presence of the silent stones, you've become the first monarch to wield public inscriptions not just as monuments, but as vessels of moral law, reaching every corner of your kingdom. This decree, a soft opening to the grand tapestry of Dhamma, has set the stage for a society that reveres life in all its forms. As the sun dips below the horizon, casting elongated shadows upon the stone, your next challenge awaits. Will you navigate the"
+      },
+      {
+        "step_id": 14,
+        "user_input": "Make a public statement declaring your personal faith in the Buddha and his teachings",
+        "score": 0.4166,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 14,
+        "user_input": "Make a public statement declaring your personal faith in the Buddha and his teachings",
+        "score": 0.8395,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "As you stand before the assembly, your voice resonates with conviction, proclaiming your unwavering faith in the Buddha and his profound teachings. The Bhabru (Bairat) Rock Edict, etched into the stone before you, speaks of your emperor's devotion to the Tri-Ratna, a testament to your reign's spiritual foundation. This edict, a beacon of the times, not only immortalizes Ashoka's dedication but also his strategic patronage, urging scholars and monks alike to delve into the sacred texts that have shaped a burgeoning faith. With the edict serving as a cornerstone, Buddhism transcends its local roots, flourishing under the auspices of a sovereign who champions its spread across continents. As the crowd disperses, whispers of intrigue stir; your next challenge"
+      },
+      {
+        "step_id": 15,
+        "user_input": "Create a group of officials whose main job is to help the poor and ensure people are treated fairly.",
+        "score": 0.5052,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 15,
+        "user_input": "Create a group of officials whose main job is to help the poor and ensure people are treated fairly.",
+        "score": 0.5052,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "As you forge this noble assembly, a cadre of officials dedicated to the plight of the impoverished, you are reminded of the Dhamma Mahamatras, those venerable servants of the 13th year of Emperor Ashoka's reign. Your group, much like them, shall tend to the frail, the elderly, and the diverse tapestry of religious sects, be they Jainas or Ajivikas. In your hands, the scepter of compassion replaces the rod of coercion, heralding a transformative era where social welfare is the cornerstone of governance. With each decree, you weave the fabric of a society where equity and kindness are paramount.\n\nYet, as the sun dips below the horizon, casting elongated shadows over your burgeoning city, you must navigate the intricate web of moral d"
+      },
+      {
+        "step_id": 16,
+        "user_input": "Use the empire's wealth to build hospitals, dig wells, and plant trees for the public good.",
+        "score": 0.4313,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 16,
+        "user_input": "Use the empire's wealth to build hospitals, dig wells, and plant trees for the public good.",
+        "score": 0.4313,
+        "attempt": 2,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 16,
+        "user_input": "Use the empire's wealth to build hospitals, dig wells, and plant trees for the public good.",
+        "score": 0.7073,
+        "attempt": 3,
+        "outcome": "success",
+        "narrative": "As you channel the empire's wealth, your hands, like those of Emperor Ashoka, shape the land to serve the people. With wisdom inherited from his edicts, you initiate the planting of banyan trees and mango groves along the bustling highways, creating oases of shade for travelers and merchants alike. Your vision extends beyond mere comfort; you establish botanical gardens, meticulously curated for their medicinal herbs, becoming a beacon of healing and knowledge. Amidst these green sanctuaries, the 'Arogyashalas' rise, hospitals funded by the state, offering care and compassion to all who seek refuge. Here, the first recorded state-funded veterinary care springs forth, as animal hospitals dot the landscape, ensuring even the beasts of burden are cared for. Your reign is a testament to"
+      },
+      {
+        "step_id": 17,
+        "user_input": "Carve messages of kindness and moral behavior on rocks and pillars for everyone to see.",
+        "score": 0.2323,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 17,
+        "user_input": "Carve messages of kindness and moral behavior on rocks and pillars for everyone to see.",
+        "score": 0.5824,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "As you trace the smooth contours of the ancient stones before you, your chisel slices with purpose, leaving behind symbols of kindness and morality in a script that whispers of unity and compassion. You've chosen Prakrit, the language of the common folk, ensuring that these messages transcend the barriers of class and culture, much like Ashoka once did. With each carving, you feel a connection to the past, as if echoes of a thousand hearts are speaking through you. The Lion Capital of Sarnath, once perched atop such pillars, now stands proudly as the National Emblem of India, a testament to Ashoka's vision and your own. Across the sprawling lands of modern-day India, Pakistan, Nepal, and Afghanistan, your inscriptions join over 30 others, a tapestry of ancient wisdom for all to see. Now, as the sun"
+      },
+      {
+        "step_id": 18,
+        "user_input": "Organize a major religious meeting to settle arguments and keep the faith unified.",
+        "score": 0.6347,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "You gather the faithful under the ancient banyan trees of Pataliputra, their voices a harmonious blend of anticipation and devotion. With the wisdom of Moggaliputta Tissa as your guide, you navigate the complexities of spiritual discourse, orchestrating this grand council with a steady hand. As consensus is reached, your efforts culminate in the meticulous compilation of the 'Kathavatthu', a beacon of clarity in a sea of doctrinal disputes. The air is charged with a sense of accomplishment, yet your heart beats for a larger purpose. Inspired by the council's success, you witness Emperor Ashoka's visionary resolve to extend the dharma's reach far beyond the subcontinent's borders. With the world as your chessboard and the teachings of the Buddha as your pawns, you prepare for the"
+      },
+      {
+        "step_id": 19,
+        "user_input": "Send peaceful messengers to foreign kings to share knowledge, medicine, and moral values.",
+        "score": 0.5424,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 19,
+        "user_input": "Send peaceful messengers to foreign kings to share knowledge, medicine, and moral values.",
+        "score": 0.5424,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "As you dispatch your peaceful envoys, bearing the weight of diplomacy and wisdom, you are not merely traversing the physical distance to the courts of distant kings; you are weaving the delicate tapestry of 'Soft Power', a concept that will echo through the annals of history. These missions, as recorded in the venerable Rock Edict XIII, extend beyond mere pleasantries—they are a testament to the grandeur of your sovereign, Ashoka. With each step towards the realms of Antiochus II, Ptolemy II, Antigonus Gonatas, Magas, and Alexander, you carry not only the seeds of knowledge and the balm of medicinal herbs but also the gentle teachings of Buddhism. Your actions, subtle yet profound, forge a legacy of compassion and understanding across the boundaries of nations.\n\nNow, as the sun sets behind the"
+      },
+      {
+        "step_id": 20,
+        "user_input": "Send your children on a mission to other countries to spread the message of peace and kindness.",
+        "score": 0.5761,
+        "attempt": 1,
+        "outcome": "failure"
+      },
+      {
+        "step_id": 20,
+        "user_input": "Send your children on a mission to other countries to spread the message of peace and kindness.",
+        "score": 0.7863,
+        "attempt": 2,
+        "outcome": "success",
+        "narrative": "You, a noble advisor, have decided to send your children on a sacred mission, embarking on a journey across treacherous seas and vast lands. With wisdom as your compass and compassion your guide, your mission is to sow the seeds of peace and kindness, much like Mahinda once did. Under the guidance of your enlightened counsel, your children will traverse the ancient pathways, bearing the sacred branch from the Bodhi tree, gifted by Sanghamitta. This living relic, cradled in your hands, will soon take root in the fertile soils of Anuradhapura, a testament to your people's enduring spirit. As the roots of this ancient tree spread, so too will the teachings of Theravada Buddhism, transforming the island into a beacon of serenity that will shine for over two millennia.\n\nBut your quest does not"
+      },
+      {
+        "step_id": 21,
+        "user_input": "Set a final moral code for the people that emphasizes truth, mercy, and self-control.",
+        "score": 0.6419,
+        "attempt": 1,
+        "outcome": "success",
+        "narrative": "As you stand before the towering pillars, each a testament to Ashoka's reign, your voice carries the weight of a future heedful to history. With a solemn nod, you decree the final moral code, echoing the wisdom of the seven Pillar Edicts, which have long served as the cornerstone of Ashoka's legacy. Your words, imbued with the virtues of truth, mercy, and self-control, will resonate through the annals of time. Here, at the heart of an empire that stretched from the Hindu Kush to Bengal, you invoke the spirit of Pillar Edict VII, recounting the vast expanse of compassion and governance Ashoka had embodied. These pillars, more than mere stone, are the embodiment of a civilization's pinnacle—a marvel of engineering and transport, carved from the"
+      }
+    ],
+    "step_attempts": {
+      "1": 2,
+      "2": 1,
+      "6": 2,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "12": 3,
+      "14": 1,
+      "15": 1,
+      "16": 2,
+      "17": 1,
+      "19": 1,
+      "20": 1
+    }
+  },
+  "progress": {
+    "character_id": "ashoka",
+    "era_id": "mauryan",
+    "current_step": 21,
+    "total_steps": 21,
+    "pct_complete": 100.0
+  },
+  "current_step_data": {
+    "done": true,
+    "message": "Journey complete!"
+  }
+}

@@ -439,7 +439,11 @@ export function StoryGameplayScreen({
             <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-b-4 border-l-4 border-amber-800 z-10" />
             <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-4 border-r-4 border-amber-800 z-10" />
             <div className="relative w-full h-full flex items-center justify-center">
-              <ThreeDModelViewer modelUrl={lowPolyModelUrl} />
+              <ThreeDModelViewer
+                modelUrl={lowPolyModelUrl}
+                title={event.title}
+                subtitle={`${character.name} • ${event.period}`}
+              />
             </div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -448,7 +452,7 @@ export function StoryGameplayScreen({
               className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-amber-900/90 to-transparent p-3 md:p-4 z-10"
             >
               <p className="text-amber-100 text-xs md:text-sm italic text-center" style={{ fontFamily: 'Crimson Text, serif' }}>
-                {event.title} • {event.period}
+                Story tableau • rotate to inspect
               </p>
             </motion.div>
           </div>

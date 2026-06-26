@@ -1,9 +1,10 @@
+from __future__ import annotations
+
 from fastapi import FastAPI
 from pathlib import Path
 import json
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from rag_engine import HistoricalRAGEngine
 
 app = FastAPI()
 
@@ -21,11 +22,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create ONE global engine instance
-engine = HistoricalRAGEngine()
 SAVE_DIR = Path(__file__).resolve().parent / "saves"
 SAVE_PATH = SAVE_DIR / "current_game.json"
 active_save_metadata: "SaveMetadata | None" = None
+engine = None
 
 
 # ──────────────────────────────────────────────
@@ -51,8 +51,17 @@ class SaveRequest(BaseModel):
     metadata: SaveMetadata
 
 
+def _get_engine():
+    global engine
+    if engine is None:
+        from rag_engine import HistoricalRAGEngine
+
+        engine = HistoricalRAGEngine()
+    return engine
+
+
 def _write_save_file(metadata: SaveMetadata):
-    state = engine.export_state()
+    state = _get_engine().export_state()
     if state is None:
         raise RuntimeError("No active game to save.")
 
@@ -76,7 +85,7 @@ def _read_save_file() -> dict | None:
 
 
 def _autosave_active_game():
-    if active_save_metadata is None or engine.state is None:
+    if active_save_metadata is None or engine is None or engine.state is None:
         return
 
     _write_save_file(active_save_metadata)
@@ -94,23 +103,24 @@ def root():
 @app.post("/start")
 def start_game(data: StartRequest):
     global active_save_metadata
-    state = engine.load_character(data.character_id, data.era_id)
+    rag_engine = _get_engine()
+    state = rag_engine.load_character(data.character_id, data.era_id)
     active_save_metadata = None
     return {
         "message": "Game started",
-        "state": engine.get_progress(),
-        "first_step": engine.present_step()
+        "state": rag_engine.get_progress(),
+        "first_step": rag_engine.present_step()
     }
 
 
 @app.get("/step")
 def get_current_step():
-    return engine.present_step()
+    return _get_engine().present_step()
 
 
 @app.post("/input")
 def process_input(data: InputRequest):
-    if engine.state is None:
+    if engine is None or engine.state is None:
         return {
             "success": False,
             "type": "hint",
@@ -138,6 +148,8 @@ def process_input(data: InputRequest):
 
 @app.get("/progress")
 def progress():
+    if engine is None:
+        return {}
     return engine.get_progress()
 
 
@@ -162,7 +174,7 @@ def save_game(data: SaveRequest):
     active_save_metadata = data.metadata
     return {
         "message": "Game saved",
-        "progress": engine.get_progress(),
+        "progress": _get_engine().get_progress(),
     }
 
 
@@ -176,9 +188,10 @@ def load_saved_game():
             "message": "No saved game found.",
         }
 
-    state = engine.restore_state(save_data["state"])
-    current_step = engine.present_step()
-    progress = engine.get_progress()
+    rag_engine = _get_engine()
+    state = rag_engine.restore_state(save_data["state"])
+    current_step = rag_engine.present_step()
+    progress = rag_engine.get_progress()
     active_save_metadata = SaveMetadata(**save_data["metadata"])
 
     return {

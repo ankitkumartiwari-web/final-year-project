@@ -16,7 +16,6 @@ env/
 
 # Backend local artifacts
 backend/models/
-backend/saves/
 
 # Node / frontend
 node_modules/

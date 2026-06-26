@@ -1,3 +1,3 @@
-// Sample low poly 3D model (GLTF format placeholder)
-// Replace with actual GLTF/GLB file for production
-export const lowPolyModelUrl = '/src/assets/Fort.glb';
+import fortModelUrl from './Fort.glb';
+
+export const lowPolyModelUrl = fortModelUrl;
